@@ -1,0 +1,37 @@
+#Tailored to HacDC's CNC mill.
+#http://wiki.hacdc.org/index.php/Category:CNC_Mill
+
+# You may want to uncomment and change those in local project files
+front=PCB.top.gbr
+back=PCB.bottom.gbr
+outline=PCB.outline.gbr
+drill=PCB.plated-drill.cnc
+
+
+# The board outline is 10mil wide, no holes
+fill-outline = yes
+outline-width = 0.0433071		#1.10 mm bit.
+
+# parameters for isolation routing / engraving / etching
+#offset=1					#voronoi regions (commented out)
+offset=0.0433071		#1.10 mm bit.
+zwork=0.0492126		#1.25mm above table. Boards usually >1.5mm thick.
+zsafe=0.19685			#5mm above table.
+mill-feed=2.95276		#75mm/min. Always go slow here.
+mill-speed=10000
+
+
+# parameters for cutting out boards
+cutter-diameter=0.0433071		#1.10 mm bit.
+zcut=0									#Right on the table.
+cut-feed=2.95276					#75mm/min.
+cut-speed=10000
+cut-infeed=0.00393701			#Lowers Z 0.1mm each pass.
+
+
+# drilling parameters
+zdrill=0							#Right on the table.
+zchange=0.19685			#5mm above table.
+drill-feed=0.984252		#25mm/min
+drill-speed=10000
+drill-front=true

@@ -1,0 +1,20 @@
+#Text substitutions. "DeveloperName", "YEAR", and "Project" appears in many places, specifically the copyright declarations and gsch2pcb directive.
+find . -type f -exec sed -i s/Project/newProjectName/g {} \;
+find . -type f -exec sed -i s/DeveloperName/newDeveloperName/g {} \;
+find . -type f -exec sed -i s/YEAR/currentYEAR/g {} \;
+
+#Rename project files.
+mv ./Project ./newProjectName
+mv ./Project.sch ./newProjectName.sch
+
+#Remove CC0 license.
+rm ./license.html
+rm ./license.txt
+mv ./license.txt.gpl ./license.txt
+rm ./CC0_license.txt
+
+#Replace this file with a usable readme template.
+mv ./README.template ./README
+
+_Copyright_
+All content in this folder not owned by other authors is intended to be public domain. Other copyright notices may be provided as templates. See license.txt for details.
