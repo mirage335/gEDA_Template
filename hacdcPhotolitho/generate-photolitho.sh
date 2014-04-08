@@ -60,10 +60,10 @@ for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
 	pcb2gcode
 	
 	gerbv --export rs274x --translate 0,0 --translate 3,0 --translate 0,3 --translate 3,3 --output=Panel.gbr $pcbname.top.gbr $pcbname.top.gbr $pcbname.bottom.gbr $pcbname.bottom.gbr
-	gerbv -b \#FFFFFF -f \#00000000 -D 1200 --export pdf --output Lithomask.pdf Panel.gbr
+	gerbv -b \#FFFFFF -f \#00000000 --export pdf --output Lithomask.pdf Panel.gbr
 	rm Panel.gbr
 	
-	gerbv -b \#FFFFFF -D 1200 --export pdf --output Model.pdf -f \#8B2323 $pcbname.top.gbr -f \#3A5FCD $pcbname.bottom.gbr -f \#104E8B $pcbname.outline.gbr
+	gerbv -b \#FFFFFF --export pdf --output Model.pdf -f \#8B2323 $pcbname.top.gbr -f \#3A5FCD $pcbname.bottom.gbr -f \#104E8B $pcbname.outline.gbr
 	cd ..
 	
 done
