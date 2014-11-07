@@ -1,0 +1,24 @@
+outline=PCB.outline.gbr
+drill=PCB.plated-drill.cnc
+drill-output=wrong.ngc
+
+zsafe=0.02				#100mils/2.5mm Above PCB surface.
+zchange=0.02				#100mils/2.5mm Above PCB surface.
+
+
+# parameters for cutting out boards
+cutter-diameter=0.2			#Don't really care about the bit size, just add a bunch of margin.
+#cutter-diameter=0			#Test bit.
+#zcut=-0.05				#1/64th inch board.
+zcut=-0.085				#1/16th inch board.
+cut-feed=1.75				#Rate in inches per minute. 0.1 = 100mils = 2.5mm/min.
+cut-speed=10000
+cut-infeed=0.035			#Lowers Z gradually each pass. Recommend less than half bit width, but greater than 20 mils.
+
+
+# drilling parameters
+#zdrill=-0.05				#1/64th inch board.
+zdrill=-0.1				#1/16th inch board.
+drill-feed=0.25				#Rate in inches per minute. 0.1 = 100mils = 2.5mm/min.
+drill-speed=10000
+milldrill=true				#Mill out holes larger than the current bit size. Eliminates tool change steps.

@@ -1,0 +1,27 @@
+<openscam>
+  <!-- Note, all values are in mm regardless of 'units' option. -->
+  <!-- NC Files -->
+  <nc-files>
+  ./drill.ngc
+  ./OpenSCAM_toolchange.ngc
+  ./outline.ngc
+  </nc-files>
+
+  <!-- Project -->
+  <units v='INCH'/>
+
+  <!-- Renderer -->
+  <resolution v='0.066306'/>
+
+  <!-- Workpiece -->
+  <!-- MOUSER 590-660 Presensitized Board is ~150x225x-1.5875mm --> 
+  <automatic-workpiece v='false'/>
+  <workpiece-max v='(150,100,0)'/>
+  <workpiece-min v='(-25,-25,-1.5875)'/> <!-- 1/16th inch thick -->
+  <!-- <workpiece-min v='(-25,-25,-0.396875)'/> --> <!-- 1/64th inch thick -->
+
+  <tool_table>
+    <tool length='0.375' number='1' diameter='0.025' shape='CYLINDRICAL' units='inch'/>
+    <tool length='0.375' number='2' diameter='0.044' shape='CYLINDRICAL' units='inch'/>
+  </tool_table>
+</openscam>

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Converts gEDA projects to files to suitable for PCB fabrication and assembly, using CNC milling to cut holes, photolithography to form traces, and (optionally) laser cutting to create a solder paste stencil.
+# Converts gEDA projects to files to suitable for CAD modeling.
 
 # The MIT License (MIT)
 # Copyright (c) 2013 Shawn Nock
@@ -38,7 +38,7 @@ PWD_SanityCheck() {
 	fi
 }
 
-PWD_SanityCheck generate-photolitho.sh
+PWD_SanityCheck generate-cad.sh
 
 # Generate Gerbers for each pcb file in the parent directory
 count=0
@@ -52,23 +52,20 @@ for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     fi
     pcb -x gerber --all-layers --name-style fixed --gerberfile $pcbname/$pcbname ../$pcbname.pcb
 	
-	cp ./millproject $pcbname/
-	
-	sed 's/PCB/'$pcbname'/g' -i $pcbname/millproject
-	
 	cd $pcbname/
-	pcb2gcode
 	
-	gerbv --export rs274x --translate 0,0 --translate 3,0 --translate 0,3 --translate 3,3 --output=Panel.gbr $pcbname.top.gbr $pcbname.top.gbr $pcbname.bottom.gbr $pcbname.bottom.gbr
-	gerbv -b \#FFFFFF -f \#00000000 --export pdf --output Lithomask.pdf Panel.gbr
-	rm Panel.gbr
+	gerbv -b \#FFFFFF --export svg --output combined.svg $pcbname.plated-drill.cnc $pcbname.outline.gbr
+	inkscape -E combined.eps combined.svg && pstoedit -dt -f dxf combined.eps combined.dxf	#Inches. Circles will be approximate
 	
-	gerbv -b \#FFFFFF --export pdf --output Model.pdf -f \#8B2323 $pcbname.top.gbr -f \#3A5FCD $pcbname.bottom.gbr -f \#104E8B $pcbname.outline.gbr
+	gerbv -b \#FFFFFF --export png --dpi 600x600 --output Render.png -f \#000000FF $pcbname.topsilk.gbr -f \#ccccccFF $pcbname.plated-drill.cnc -f \#8B2323FF $pcbname.top.gbr -f \#3A5FCDFF $pcbname.bottom.gbr -f \#104E8BFF $pcbname.outline.gbr
+	
+	convert Render.png -bordercolor white -border 1x1 -alpha set -channel RGBA -fuzz 1% -fill none -floodfill +0+0 white -shave 1x1 Render.png
+	convert Render.png -fuzz 1% -transparent \#cccccc Render.png
+	
 	cd ..
 	
 done
 
-find . -name drill.ngc -exec sed -i 's/.*S10000.*/&\nM3\nG91.1/' {} \;
-find . -maxdepth 2 -regextype posix-egrep -regex ".*(silk|fab\.gbr|plated-drill\.cnc|mask\.gbr|\.png).*" -delete
+find . -maxdepth 2 -regextype posix-egrep -regex ".*(silk|\.cnc|\.gbr|\.eps).*" -delete
 
 echo -e '\E[1;32;46m Finished. \E[0m'
