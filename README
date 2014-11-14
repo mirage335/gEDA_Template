@@ -1,7 +1,7 @@
 #Text substitutions. "DeveloperName", "YEAR", and "Project" appears in many places, specifically the copyright declarations and gsch2pcb directive.
-find . -type f -exec sed -i s/Project/newProjectName/g {} \;
-find . -type f -exec sed -i s/DeveloperName/newDeveloperName/g {} \;
-find . -type f -exec sed -i s/YEAR/currentYEAR/g {} \;
+find . -maxdepth 1 -type f -exec sed -i s/Project/newProjectName/g {} \;
+find . -maxdepth 1 -type f -exec sed -i s/DeveloperName/newDeveloperName/g {} \;
+find . -maxdepth 1 -type f -exec sed -i s/YEAR/currentYEAR/g {} \;
 
 #Rename project files.
 mv ./Project ./newProjectName

@@ -5,13 +5,9 @@ Important: Execute gschem and pcb from this folder when opening files. Otherwise
 
 Use the command "gsch2pcb project" to generate the pcb files from schematics. Where "project" is "Project".
 
-Bill of Materials can be generated in HTML format with genBOM script.
-
 Bulk copper should be grounded. Otherwise, the extra copper will float, degrading noise rejection and phase margins.
 
-Components with "X" at the front of their description make the circuit slightly more robust, and may be excluded. However, circuit boards should be manufactured with room for them, should they prove necessary.
-
-LibreOffice Calc (spreadsheet) can take an HTML copy/pasted from a web browser. From there, prices can be added after stripping extraneous description information with the following regex: \ [^0-9].*
+Scripts provided in "production" directory as a git submodule may be used to generate BOMs, CAD models, photolithography assets, and third-party fabrication documentation. See README there for details.
 
 __Copyright__
 This file is part of Project.
