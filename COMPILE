@@ -9,6 +9,9 @@ Bulk copper should be grounded. Otherwise, the extra copper will float, degradin
 
 Scripts provided in "production" directory as a git submodule may be used to generate BOMs, CAD models, photolithography assets, and third-party fabrication documentation. See README there for details.
 
+Reference PCB layouts for subsystems may be renamed for use in master layout with sed.
+sed -i 's/\(Element\[\".*\"\ \".*\"\ \"\)\(.*\)\(\"\ \"\)\(.*\)\(\".*\".*\".*\)/\1<newRef>\/\2\3\4\5/g' <pcbName>.<newRef>.pcb
+
 __Copyright__
 This file is part of Project.
 

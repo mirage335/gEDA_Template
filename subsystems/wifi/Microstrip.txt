@@ -1,0 +1,1 @@
+Oshpark 2-layer PCB traces have been found to provide ~50Ohm impedance at 110mil width. 
