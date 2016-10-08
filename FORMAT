@@ -1,0 +1,23 @@
+refdes
+footprint
+value
+description	$0.00 MOUSER/DigiKey 123-456-789
+
+*nobom		If true, true .
+*noplace	If true, true .
+*cost		If any, priced at small batch quantity, USD.
+*nationality	If outside USA.
+
+device
+mfr
+mfrpn
+dst		Mouser, DigiKey
+dstpn
+link
+link_page
+
+supplier	If assembler, a . If customer, c .
+sbapn		If supplied by Small Batch Assembly .
+kitting		tape-with-leader, tape-no-leader, other
+kitting_d	If other, description.
+
