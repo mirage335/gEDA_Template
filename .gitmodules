@@ -1,3 +1,0 @@
-[submodule "production"]
-	path = production
-	url = git@github.com:mirage335/gedaProduction.git
